@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./global.css";
 import "./sidebar.css";
 
-
 function App() {
   return (
     <div id="app">
@@ -19,9 +18,10 @@ function App() {
             <label htmlFor="nota">Anotações</label>
             <textarea></textarea>
           </div>
+          
+          
+          <button type="submit">Salvar</button>
         </form>
-
-        <button type="submit">Salvar</button>
       </aside>
       <main></main>
     </div>
