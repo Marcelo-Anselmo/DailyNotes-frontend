@@ -1,17 +1,15 @@
 import React from "react";
 
-const Notes = () => {
+const Notes = ({ data }) => {
   return (
     <>
       <li className="notepad-infos">
         <div>
-          <strong>Fazer Compras</strong>
+          <strong>{data.title}</strong>
           <div>x</div>
         </div>
 
-        <textarea
-          defaultValue="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis
-          iste fugit obcaecati optio."></textarea>
+        <textarea defaultValue={data.notes}></textarea>
         <span>!</span>
       </li>
     </>
