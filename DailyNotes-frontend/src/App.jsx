@@ -1,6 +1,9 @@
 import { useState } from "react";
+import "./app.css";
 import "./global.css";
 import "./sidebar.css";
+import "./main.css";
+import Notes from "./components/Notes/Notes";
 
 function App() {
   return (
@@ -18,12 +21,17 @@ function App() {
             <label htmlFor="nota">Anotações</label>
             <textarea></textarea>
           </div>
-          
-          
+
           <button type="submit">Salvar</button>
         </form>
       </aside>
-      <main></main>
+      <main>
+        <ul>
+          <Notes />
+          <Notes />
+          <Notes />
+        </ul>
+      </main>
     </div>
   );
 }
