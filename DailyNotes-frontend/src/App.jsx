@@ -15,14 +15,29 @@ function App() {
   const [allNotes, setAllNotes] = useState([]);
 
   useEffect(() => {
-    async function getAllNotes() {
-      const response = await api.get("/anottations");
-
-      setAllNotes(response.data);
-    }
-
     getAllNotes();
   }, []);
+
+  async function getAllNotes() {
+    const response = await api.get("/anottations");
+    setAllNotes(response.data);
+  }
+
+  async function handleDelete(id) {
+    const deletedNote = await api.delete(`/anottations/${id}`);
+
+    if (deletedNote) {
+      setAllNotes(allNotes.filter((note) => note._id !== id));
+    }
+  }
+
+  async function handleChangePriority(id) {
+    const note = await api.post(`/priorities/${id}`);
+
+    if (note) {
+      getAllNotes();
+    }
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -58,9 +73,12 @@ function App() {
 
         <form onSubmit={handleSubmit}>
           <div className="input-block">
-            <label htmlFor="title">Titulo da Anotação</label>
+            <label htmlFor="title">
+              Titulo da Anotação <span>{title.length} / 30 </span>
+            </label>
             <input
               required
+              maxLength="30"
               value={title}
               onChange={(e) => {
                 setTitle(e.target.value);
@@ -88,7 +106,12 @@ function App() {
       <main>
         <ul>
           {allNotes.map((data) => (
-            <Notes key={Notes.indexOf} data={data} />
+            <Notes
+              key={Notes.indexOf}
+              data={data}
+              handleDelete={handleDelete}
+              handleChangePriority={handleChangePriority}
+            />
           ))}
         </ul>
       </main>
