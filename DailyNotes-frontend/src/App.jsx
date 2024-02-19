@@ -7,6 +7,7 @@ import "./global.css";
 import "./sidebar.css";
 import "./main.css";
 import Notes from "./components/Notes/Notes";
+import RadioButton from "./components/RadioButton/RadioButton";
 
 function App() {
   const [title, setTitle] = useState("");
@@ -82,6 +83,7 @@ function App() {
             Salvar
           </button>
         </form>
+        <RadioButton />
       </aside>
       <main>
         <ul>
