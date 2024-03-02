@@ -1,0 +1,9 @@
+aside div.radioOptions {
+    color: #acacac;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
