@@ -10,6 +10,7 @@ import Notes from "./components/Notes/Notes";
 import RadioButton from "./components/RadioButton/RadioButton";
 
 function App() {
+  const [selectedValue, setSelectedValue] = useState("all");
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
   const [allNotes, setAllNotes] = useState([]);
@@ -23,6 +24,25 @@ function App() {
     setAllNotes(response.data);
   }
 
+  async function loadNotes(option) {
+    const params = { priority: option };
+    const response = await api.get("/priorities", { params });
+
+    if (response) {
+      setAllNotes(response.data);
+    }
+  }
+
+  function handleChange(e) {
+    setSelectedValue(e.value);
+
+    if (e.checked && e.value !== "all") {
+      loadNotes(e.value);
+    } else {
+      getAllNotes();
+    }
+  }
+
   async function handleDelete(id) {
     const deletedNote = await api.delete(`/anottations/${id}`);
 
@@ -34,7 +54,9 @@ function App() {
   async function handleChangePriority(id) {
     const note = await api.post(`/priorities/${id}`);
 
-    if (note) {
+    if (note && selectedValue !== "all") {
+      loadNotes(selectedValue);
+    } else if (note) {
       getAllNotes();
     }
   }
@@ -101,7 +123,10 @@ function App() {
             Salvar
           </button>
         </form>
-        <RadioButton />
+        <RadioButton
+          selectedValue={selectedValue}
+          handleChange={handleChange}
+        />
       </aside>
       <main>
         <ul>

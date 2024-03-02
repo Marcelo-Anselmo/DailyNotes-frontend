@@ -2,12 +2,7 @@ import * as React from "react";
 import Radio from "@mui/material/Radio";
 import "./style.css";
 
-const RadioButton = () => {
-  const [selectedValue, setSelectedValue] = React.useState("a");
-
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
+const RadioButton = ({ selectedValue, handleChange }) => {
 
   const controlProps = (item) => ({
     checked: selectedValue === item,
@@ -28,6 +23,9 @@ const RadioButton = () => {
               color: "#EB8F7A",
             },
           }}
+          checked={selectedValue === "all"}
+          onChange={(e) => handleChange(e.target)}
+          value="all"
         />
         <span>Todos</span>
       </div>
@@ -41,6 +39,9 @@ const RadioButton = () => {
               color: "#EB8F7A",
             },
           }}
+          checked={selectedValue === "true"}
+          onChange={(e) => handleChange(e.target)}
+          value="true"
         />
         <span>Prioridade</span>
       </div>
@@ -54,6 +55,9 @@ const RadioButton = () => {
               color: "#EB8F7A",
             },
           }}
+          checked={selectedValue === "false"}
+          onChange={(e) => handleChange(e.target)}
+          value="false"
         />
         <span>Normal</span>
       </div>
